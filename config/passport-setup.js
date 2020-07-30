@@ -12,9 +12,10 @@ passport.use(
       clientID: keys.google.clientID,
       clientSecret: keys.google.clientSecret,
     },
-    //second param
-    () => {
-      //passsport callback function
+    //second param - #5th stage
+    (accessToken, refreshToken, profile, done) => {
+      //passsport callback function after data is called from #4th stage
+      console.log(profile);
     }
   )
 );
