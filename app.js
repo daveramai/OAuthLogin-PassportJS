@@ -2,8 +2,14 @@
 let express = require("express");
 let app = express();
 
+//import router
+let authRoutes = require("./routes/auth-routes");
+
 //set up view engine
 app.set("view engine", "ejs");
+
+//set up routes /auth/...
+app.use("/auth", authRoutes);
 
 //create a home route
 app.get("/", (req, res) => {

@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>OAuth Tutorials</title>
+    <title>Login</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="" />
@@ -46,9 +46,22 @@
         padding: 0 10px;
         color: #333;
       }
+      .google-btn {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px;
+        background: #ff5353;
+      }
     </style>
   </head>
   <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
     <nav>
       <ul>
         <li><a href="/auth/logout">Logout</a></li>
@@ -57,13 +70,11 @@
       </ul>
     </nav>
     <header>
-      <h1>Net Ninja OAuth Tut's</h1>
-      <h2>Homepage</h2>
+      <h1>Login using...</h1>
     </header>
     <main>
-      <p>Probably the best OAuth tutorials on the planet :)</p>
+      <a class="google-btn" href="/auth/google">Google+</a>
     </main>
-
     <script src="" async defer></script>
   </body>
 </html>
