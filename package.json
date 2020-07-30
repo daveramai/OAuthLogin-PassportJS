@@ -1,0 +1,23 @@
+{
+  "name": "ninja-oauthlogin",
+  "version": "1.0.0",
+  "description": "My OAuth Login Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daveramai/OAuthLogin-PassportJS.git"
+  },
+  "author": "Divindra Ramai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daveramai/OAuthLogin-PassportJS/issues"
+  },
+  "homepage": "https://github.com/daveramai/OAuthLogin-PassportJS#readme",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  }
+}
