@@ -1,6 +1,7 @@
 //invoke our express application
 let express = require("express");
 let app = express();
+let passportSetup = require("./config/passport-setup"); //#2nd stage - kick start/execute the strategy - passport-setup
 
 //import router
 let authRoutes = require("./routes/auth-routes");
