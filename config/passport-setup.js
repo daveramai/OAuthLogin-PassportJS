@@ -4,6 +4,21 @@ const GoogleStrategy = require("passport-google-oauth20");
 const keys = require("./keys");
 const User = require("../models/user-model");
 
+//serialize function - goes out to a cookie
+passport.serializeUser((user, done) => {
+  //mongo id on our db
+  done(null, user.id); //it will pass the id off somewhere else
+});
+
+//serialize function - comes back from a cookie
+//mongo id on our db
+passport.deserializeUser((id, done) => {
+  //retrieve the user from mongo
+  User.findById(id).then((theUserFound) => {
+    done(null, theUserFound); //it will pass the id off somewhere else
+  });
+});
+
 //tell passport to use google strategy
 passport.use(
   new GoogleStrategy(
@@ -23,6 +38,7 @@ passport.use(
         //truty value as well
         if (currUser) {
           console.log("User is:" + currUser);
+          done(null, currUser);
         } else {
           //we don't have that user, then create user in db
           //Save profile info from Google and create a new user model then save to mongodb
@@ -32,6 +48,7 @@ passport.use(
           })
             .save() //save() is a promise (async call)
             .then((newUser) => console.log("new user created: " + newUser)); //then returns a value from the DB e.g. newUser
+          done(null, newUser);
         }
       });
     }
