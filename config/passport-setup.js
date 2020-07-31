@@ -30,6 +30,7 @@ passport.use(
     },
     //second param - #5th stage - callback function
     (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       //passsport callback function after data is called from #4th stage
       // console.log(profile);
 
@@ -45,6 +46,7 @@ passport.use(
           new User({
             username: profile.displayName,
             googleId: profile.id,
+            thumbNail: profile._json.picture,
           })
             .save() //save() is a promise (async call)
             .then((newUser) => console.log("new user created: " + newUser)); //then returns a value from the DB e.g. newUser

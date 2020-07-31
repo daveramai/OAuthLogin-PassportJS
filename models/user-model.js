@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   googleId: String,
+  thumbNail: String,
 });
 
 //create a model of user(s) - pluralize on mongodb
