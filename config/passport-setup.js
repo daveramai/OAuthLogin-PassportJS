@@ -1,7 +1,8 @@
 //#1st stage - create/setup the strategy - with passport
-let passport = require("passport");
-let GoogleStrategy = require("passport-google-oauth20");
-let keys = require("./keys");
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20");
+const keys = require("./keys");
+const User = require("../models/user-model");
 
 //tell passport to use google strategy
 passport.use(
@@ -12,10 +13,18 @@ passport.use(
       clientID: keys.google.clientID,
       clientSecret: keys.google.clientSecret,
     },
-    //second param - #5th stage
+    //second param - #5th stage - callback function
     (accessToken, refreshToken, profile, done) => {
       //passsport callback function after data is called from #4th stage
-      console.log(profile);
+      // console.log(profile);
+
+      //Save profile info from Google and create a new user model then save to mongodb
+      new User({
+        username: profile.displayName,
+        googleId: profile.id,
+      })
+        .save() //save() is a promise (async call)
+        .then((newUser) => console.log("new user created: " + newUser)); //then returns a value from the DB e.g. newUser
     }
   )
 );
