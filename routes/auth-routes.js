@@ -3,13 +3,14 @@ let passport = require("passport");
 
 //auth login
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", { myuser: req.user });
 });
 
 //auth logout
 router.get("/logout", (req, res) => {
   //handle with passport
-  res.send("logging out");
+  req.logOut(); //remove id from cookie stored - can see it on developer tools>network
+  res.redirect("/"); //redirect to homepage
 });
 
 //auth with google

@@ -50,7 +50,7 @@ app.use("/profile", profileRoutes);
 
 //create a home route
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { myuser: req.user });
 });
 
 //listen to a port
