@@ -4,13 +4,13 @@ const GoogleStrategy = require("passport-google-oauth20");
 const keys = require("./keys");
 const User = require("../models/user-model");
 
-//serialize function - goes out to a cookie
+//serialize function - id is stuffed in a cookie
 passport.serializeUser((user, done) => {
   //mongo id on our db
   done(null, user.id); //it will pass the id off somewhere else
 });
 
-//serialize function - comes back from a cookie
+//serialize function - id comes back from a cookie
 //mongo id on our db
 passport.deserializeUser((id, done) => {
   //retrieve the user from mongo
