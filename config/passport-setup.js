@@ -18,13 +18,22 @@ passport.use(
       //passsport callback function after data is called from #4th stage
       // console.log(profile);
 
-      //Save profile info from Google and create a new user model then save to mongodb
-      new User({
-        username: profile.displayName,
-        googleId: profile.id,
-      })
-        .save() //save() is a promise (async call)
-        .then((newUser) => console.log("new user created: " + newUser)); //then returns a value from the DB e.g. newUser
+      //check if user exist on my mongodb
+      User.findOne({ googleId: profile.id }).then((currUser) => {
+        //truty value as well
+        if (currUser) {
+          console.log("User is:" + currUser);
+        } else {
+          //we don't have that user, then create user in db
+          //Save profile info from Google and create a new user model then save to mongodb
+          new User({
+            username: profile.displayName,
+            googleId: profile.id,
+          })
+            .save() //save() is a promise (async call)
+            .then((newUser) => console.log("new user created: " + newUser)); //then returns a value from the DB e.g. newUser
+        }
+      });
     }
   )
 );
