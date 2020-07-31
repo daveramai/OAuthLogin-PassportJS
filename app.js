@@ -12,9 +12,24 @@ let authRoutes = require("./routes/auth-routes");
 app.set("view engine", "ejs");
 
 //connect to mongodb
-mongoose.connect(keys.mongodb.dbURI, () => {
-  console.log("Connected to mongodb");
-});
+// mongoose.connect(keys.mongodb.dbURI, () => {
+//   console.log("Connected to mongodb");
+// });
+
+// //connect to mongodb
+try {
+  mongoose.connect(
+    keys.mongodb.dbURI,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    },
+    () => console.log("Connected to my mongodb")
+  );
+} catch (error) {
+  console.log("could not connect to mongodb");
+}
 
 //set up routes /auth/...
 app.use("/auth", authRoutes);
