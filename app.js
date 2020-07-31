@@ -1,23 +1,22 @@
 //invoke our express application
 const express = require("express");
 const app = express();
+let authRoutes = require("./routes/auth-routes");
+let profileRoutes = require("./routes/profile-routes");
 const passportSetup = require("./config/passport-setup"); //#2nd stage - kick start/execute the strategy - passport-setup
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 
-//import router
-let authRoutes = require("./routes/auth-routes");
-
 //set up view engine
 app.set("view engine", "ejs");
 
-//setup cookie session (middleware)
+//setup app to use cookie session (middleware)
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000, //1 day in ms
-    keys: [keys.session.cookieKey],
+    keys: [keys.session.cookieKey], //encrypt cookie
   })
 );
 
@@ -47,6 +46,7 @@ try {
 
 //set up routes /auth/...
 app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes);
 
 //create a home route
 app.get("/", (req, res) => {
